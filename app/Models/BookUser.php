@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\BookRating;
 use App\Enums\BookStatus;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
@@ -35,6 +36,7 @@ class BookUser extends Pivot
             'returned_at' => 'datetime',
             'return_requested_at' => 'datetime',
             'status' => BookStatus::class,
+            'rating' => BookRating::class,
         ];
     }
 

@@ -10,6 +10,7 @@ use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Enums\FontWeight;
 use Filament\Support\Enums\Size;
@@ -70,7 +71,9 @@ class BookUsersTable
                     ->modalDescription(__('Are you sure you want to cancel your request for this book?'))
                     ->modalSubmitActionLabel(__('Yes'))
                     ->modalCancelActionLabel(__('No'))
-                    ->visible(fn (Model $record) => $record->status === BookStatus::Requested),
+                    ->visible(fn (Model $record) => $record->status === BookStatus::Requested)
+                    ->successNotificationTitle(__('Request Cancelled'))
+                    ->failureNotificationTitle(__('Failed to Cancel Request. Try again later')),
                 Action::make('return_book')
                     ->label(__('Return Book'))
                     ->button()
@@ -98,6 +101,17 @@ class BookUsersTable
                             'review' => $data['review'],
                         ]);
                     })
+                    ->successNotification(
+                        Notification::make('return_requested')
+                            ->title(__('Request placed successfully'))
+                            ->body(__('Thank you for your feedback! You will be notified when your return is processed.'))
+                            ->icon(Heroicon::CheckCircle)
+                    )
+                    ->failureNotification(
+                        Notification::make('return_failed')
+                            ->title(__('Failed to request return'))
+                            ->body(__('Please try again later. Or contact support if the issue persists.'))
+                    )
                     ->visible(fn (BookUser $record) => $record->status === BookStatus::Borrowed && ! $record->return_requested_at),
             ])
             ->emptyStateHeading(function (ListRecords $livewire) {

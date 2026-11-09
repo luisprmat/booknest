@@ -3,9 +3,11 @@
 namespace App\Filament\App\Resources\Books\Tables;
 
 use App\Enums\BookStatus;
+use App\Filament\App\Resources\BookUsers\BookUserResource;
 use App\Filament\Tables\Columns\RatingColumn;
 use App\Models\BookUser;
 use Filament\Actions\Action;
+use Filament\Notifications\Notification;
 use Filament\Support\Enums\FontWeight;
 use Filament\Support\Enums\Size;
 use Filament\Support\Enums\TextSize;
@@ -73,6 +75,22 @@ class BooksTable
                             ]
                         );
                     })
+                    ->successNotification(
+                        Notification::make()
+                            ->title(__('Book Requested'))
+                            ->actions([
+                                Action::make('view_requests')
+                                    ->label(__('View all requests'))
+                                    ->url(BookUserResource::getUrl())
+                                    ->button()
+                                    ->size(Size::ExtraSmall),
+                            ])
+                            ->persistent()
+                    )
+                    ->failureNotification(
+                        Notification::make()
+                            ->title(__('Failed to request book. Try again later.'))
+                    )
                     ->visible(fn (Model $record) => ! in_array($record?->currentBorrow?->status, [BookStatus::Requested, BookStatus::Borrowed])),
             ])
             ->searchPlaceholder(__('Search by title or author'))

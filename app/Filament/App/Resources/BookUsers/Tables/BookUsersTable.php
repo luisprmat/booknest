@@ -2,14 +2,13 @@
 
 namespace App\Filament\App\Resources\BookUsers\Tables;
 
-use App\Enums\BookRating;
 use App\Enums\BookStatus;
 use App\Filament\App\Resources\Books\BookResource;
+use App\Filament\Forms\Components\Rating;
 use App\Models\BookUser;
 use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Select;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Enums\FontWeight;
@@ -83,9 +82,8 @@ class BookUsersTable
                     ->modalHeading(__('Did you like the book?'))
                     ->modalDescription(__('Your feedback helps us improve our recommendations.'))
                     ->schema([
-                        Select::make('rating')
+                        Rating::make('rating')
                             ->label(__('Rate the book'))
-                            ->options(BookRating::class)
                             ->required(),
                         RichEditor::make('review')
                             ->label(__('Write a Review'))

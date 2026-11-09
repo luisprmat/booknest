@@ -40,6 +40,8 @@ class BooksTable
                 'default' => 1,
                 'md' => 2,
                 'xl' => 3,
-            ]);
+            ])
+            ->searchPlaceholder(__('Search by title or author'))
+            ->paginated([12]);
     }
 }

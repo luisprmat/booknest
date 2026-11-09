@@ -16,6 +16,7 @@ abstract class BasePanelProvider extends PanelProvider
             ->brandLogoHeight('2.4rem')
             ->darkMode(false)
             ->font('Source Sans 3')
-            ->viteTheme('resources/css/filament/theme.css');
+            ->viteTheme('resources/css/filament/theme.css')
+            ->globalSearch(false);
     }
 }

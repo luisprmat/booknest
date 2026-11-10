@@ -17,6 +17,7 @@ abstract class BasePanelProvider extends PanelProvider
             ->darkMode(false)
             ->font('Source Sans 3')
             ->sidebarWidth('250px')
+            ->sidebarCollapsibleOnDesktop()
             ->topbar(false)
             ->viteTheme('resources/css/filament/theme.css')
             ->globalSearch(false)

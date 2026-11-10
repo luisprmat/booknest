@@ -65,7 +65,7 @@ class AppPanelProvider extends BasePanelProvider
                             NavigationItem::make(__('Requested Books'))
                                 ->icon('tabler-clock-plus')
                                 ->url(BookUserResource::getUrl())
-                                ->activeWhen(fn () => request()->routeIs('filament.app.resources.my-books.index') && request('tab') === null)
+                                ->activeWhen(fn () => request()->routeIs('filament.app.resources.my-books.index') && (request('tab') === null || request('tab') === 'requested'))
                                 ->badge(fn () => $user->books()->where('status', 'requested')->count()),
                             NavigationItem::make(__('Currently Reading'))
                                 ->icon('tabler-book')

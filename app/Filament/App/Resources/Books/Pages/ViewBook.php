@@ -3,17 +3,19 @@
 namespace App\Filament\App\Resources\Books\Pages;
 
 use App\Filament\App\Resources\Books\BookResource;
-use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 
 class ViewBook extends ViewRecord
 {
     protected static string $resource = BookResource::class;
 
-    protected function getHeaderActions(): array
+    public function getHeading(): string
     {
-        return [
-            EditAction::make(),
-        ];
+        return '';
+    }
+
+    public function getTitle(): string
+    {
+        return $this->record->title;
     }
 }

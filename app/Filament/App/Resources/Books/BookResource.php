@@ -13,7 +13,6 @@ use App\Models\Book;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Override;
@@ -22,7 +21,11 @@ class BookResource extends Resource
 {
     protected static ?string $model = Book::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?string $slug = 'catalog';
+
+    protected static ?int $navigationSort = 1;
+
+    protected static string|BackedEnum|null $navigationIcon = 'tabler-books';
 
     protected static ?string $recordTitleAttribute = 'title';
 
@@ -36,7 +39,12 @@ class BookResource extends Resource
 
     public static function getModelLabel(): string
     {
-        return __('book');
+        return __('catalog');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('catalog');
     }
 
     public static function form(Schema $schema): Schema

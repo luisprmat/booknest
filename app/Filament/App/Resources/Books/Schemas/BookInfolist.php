@@ -21,6 +21,7 @@ use Filament\Support\Enums\Size;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
 
 class BookInfolist
 {
@@ -80,6 +81,7 @@ class BookInfolist
                                                 ]
                                             );
                                         })
+                                        ->after(fn (Component $livewire) => $livewire->dispatch('refresh-sidebar'))
                                         ->successNotification(
                                             Notification::make()
                                                 ->title(__('Book Requested'))

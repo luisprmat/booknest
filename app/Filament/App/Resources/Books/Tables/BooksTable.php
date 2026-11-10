@@ -19,6 +19,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
 
 class BooksTable
 {
@@ -75,6 +76,7 @@ class BooksTable
                             ]
                         );
                     })
+                    ->after(fn (Component $livewire) => $livewire->dispatch('refresh-sidebar'))
                     ->successNotification(
                         Notification::make()
                             ->title(__('Book Requested'))

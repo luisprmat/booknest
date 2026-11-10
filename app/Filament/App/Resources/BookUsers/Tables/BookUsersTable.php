@@ -21,6 +21,7 @@ use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Livewire\Component;
 
 class BookUsersTable
 {
@@ -70,6 +71,7 @@ class BookUsersTable
                     ->modalDescription(__('Are you sure you want to cancel your request for this book?'))
                     ->modalSubmitActionLabel(__('Yes'))
                     ->modalCancelActionLabel(__('No'))
+                    ->after(fn (Component $livewire) => $livewire->dispatch('refresh-sidebar'))
                     ->visible(fn (Model $record) => $record->status === BookStatus::Requested)
                     ->successNotificationTitle(__('Request Cancelled'))
                     ->failureNotificationTitle(__('Failed to Cancel Request. Try again later')),

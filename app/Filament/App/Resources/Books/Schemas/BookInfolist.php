@@ -69,8 +69,8 @@ class BookInfolist
                                         ->label(__('Request book'))
                                         ->button()
                                         ->icon(Heroicon::OutlinedClock)
-                                        ->action(function (Model $record) {
-                                            BookUser::updateOrCreate(
+                                        ->action(function (Model $record): void {
+                                            $bookUser = BookUser::updateOrCreate(
                                                 [
                                                     'user_id' => Auth::id(),
                                                     'book_id' => $record->id,
@@ -80,6 +80,8 @@ class BookInfolist
                                                     'requested_at' => now(),
                                                 ]
                                             );
+
+                                            $record->setRelation('currentBorrow', $bookUser);
                                         })
                                         ->after(fn (Component $livewire) => $livewire->dispatch('refresh-sidebar'))
                                         ->successNotification(

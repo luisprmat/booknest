@@ -10,6 +10,7 @@ export default defineConfig({
                 "resources/css/app.css",
                 "resources/js/app.js",
                 "resources/css/filament/theme.css",
+                "resources/css/filament/login.css",
             ],
             refresh: true,
             fonts: [
